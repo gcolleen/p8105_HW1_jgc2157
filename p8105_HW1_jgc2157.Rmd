@@ -1,0 +1,69 @@
+---
+title: "p8105_HW1_jgc2157"
+author: "Gunnar"
+date: "9/23/2021"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+loading libraries
+```{r}
+library(tidyverse)
+```
+
+*Problem 1*
+Creating a data frame with: 
+    a random sample of size 10 from a standard Normal distribution
+    a logical vector indicating whether elements of the sample are greater than 0
+    a character vector of 10 letters
+    a factor vector of length 10, with 3 different factor levels - dog, cat, mouse
+    
+```{r}
+problem1_df <- tibble(rsample = rnorm(10),
+                      greater_than_zero = rsample > 0,
+                      letters_list = letters[1:10],
+                      animals = rep(as_factor(c(1, 2, 3)), length.out = 10))
+problem1_df
+```
+
+Attempting to pull the means of each variable from problem1_df
+```{r}
+problem1_df %>%
+  pull(rsample) %>%
+  mean()
+
+problem1_df %>%
+  pull(greater_than_zero) %>%
+  mean()
+
+problem1_df %>%
+  pull(letters_list) %>%
+  mean()
+
+problem1_df %>%
+  pull(animals) %>%
+  mean()
+```
+
+Applying as.numeric to the logical, character, and factor variables in problem1_df
+```{r}
+problem1_df %>%
+  pull(greater_than_zero) %>%
+  as.numeric()
+
+problem1_df %>%
+  pull(letters_list) %>%
+  as.numeric()
+
+problem1_df %>%
+  pull(animals) %>%
+  as.numeric()
+```
+The logical variable when converted into a numeric variable becomes a binary variable of 0 and 1 because 1 represents TRUE and 0 represents FALSE. This is why a mean can be found for a logical vector.
+
+The character vector when converted into a numeric variable returns a vector of missing values as characters do not correspond to a numeric value. A mean cannot be found for a character vector because of this. 
+
+The factor vector when converted into a numeric variable returns a numeric vector reflecting the levels of the factor. 
