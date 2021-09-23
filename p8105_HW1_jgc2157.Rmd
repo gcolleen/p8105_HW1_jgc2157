@@ -94,6 +94,6 @@ ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = species)
   xlab("Bill Length (mm)") +
   ylab("Flipper Length (mm)")
 
-ggsave("birds_figure1.png")
+ggsave("birds_figure1.png", width = 30, height = 30)
 ```
 
